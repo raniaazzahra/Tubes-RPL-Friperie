@@ -4,17 +4,6 @@ namespace App\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 
-/**
- * VerifyCsrfToken
- *
- * PHP version 7
- *
- * @category VerifyCsrfToken
- * @package  VerifyCsrfToken
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class VerifyCsrfToken extends Middleware
 {
 	/**

@@ -13,17 +13,7 @@ use \App\Exceptions\OutOfStockException;
 
 use App\Authorizable;
 
-/**
- * OrderController
- *
- * PHP version 7
- *
- * @category OrderController
- * @package  OrderController
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
+
 class OrderController extends Controller
 {
 	use Authorizable;
@@ -54,9 +44,9 @@ class OrderController extends Controller
 
 		$q = $request->input('q');
 		if ($q) {
-			$orders = $orders->where('code', 'like', '%'. $q .'%')
-				->orWhere('customer_first_name', 'like', '%'. $q .'%')
-				->orWhere('customer_last_name', 'like', '%'. $q .'%');
+			$orders = $orders->where('code', 'like', '%' . $q . '%')
+				->orWhere('customer_first_name', 'like', '%' . $q . '%')
+				->orWhere('customer_last_name', 'like', '%' . $q . '%');
 		}
 
 
@@ -155,7 +145,7 @@ class OrderController extends Controller
 		);
 
 		$order = Order::findOrFail($id);
-		
+
 		$cancelOrder = \DB::transaction(
 			function () use ($order, $request) {
 				$params = [
@@ -170,7 +160,7 @@ class OrderController extends Controller
 						ProductInventory::increaseStock($item->product_id, $item->qty);
 					}
 				}
-				
+
 				return $cancelOrder;
 			}
 		);
@@ -191,7 +181,7 @@ class OrderController extends Controller
 	public function doComplete(Request $request, $id)
 	{
 		$order = Order::findOrFail($id);
-		
+
 		if (!$order->isDelivered()) {
 			\Session::flash('error', 'Mark as complete the order can be done if the latest status is delivered');
 			return redirect('admin/orders');
@@ -200,7 +190,7 @@ class OrderController extends Controller
 		$order->status = Order::COMPLETED;
 		$order->approved_by = \Auth::user()->id;
 		$order->approved_at = now();
-		
+
 		if ($order->save()) {
 			\Session::flash('success', 'The order has been marked as completed!');
 			return redirect('admin/orders');
@@ -250,7 +240,7 @@ class OrderController extends Controller
 					return true;
 				}
 			);
-			
+
 			if ($canDestroy) {
 				\Session::flash('success', 'The order has been removed');
 			} else {

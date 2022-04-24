@@ -5,17 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 
-/**
- * VerificationController
- *
- * PHP version 7
- *
- * @category VerificationController
- * @package  VerificationController
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
+
 class VerificationController extends Controller
 {
 	/*

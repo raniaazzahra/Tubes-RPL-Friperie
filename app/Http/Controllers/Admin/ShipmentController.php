@@ -10,17 +10,6 @@ use App\Models\Order;
 
 use App\Authorizable;
 
-/**
- * ShipmentController
- *
- * PHP version 7
- *
- * @category ShipmentController
- * @package  ShipmentController
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class ShipmentController extends Controller
 {
 	use Authorizable;
@@ -84,7 +73,7 @@ class ShipmentController extends Controller
 				'track_number' => 'required|max:255',
 			]
 		);
-		
+
 		$shipment = Shipment::findOrFail($id);
 
 		$order = \DB::transaction(
@@ -93,7 +82,7 @@ class ShipmentController extends Controller
 				$shipment->status = Shipment::SHIPPED;
 				$shipment->shipped_at = now();
 				$shipment->shipped_by = \Auth::user()->id;
-				
+
 				if ($shipment->save()) {
 					$shipment->order->status = Order::DELIVERED;
 					$shipment->order->save();
@@ -108,7 +97,7 @@ class ShipmentController extends Controller
 		}
 
 		\Session::flash('success', 'The shipment has been updated');
-		return redirect('admin/orders/'. $order->id);
+		return redirect('admin/orders/' . $order->id);
 	}
 
 	/**

@@ -5,17 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-/**
- * Order
- *
- * PHP version 7
- *
- * @category Order
- * @package  Order
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class Order extends Model
 {
 	use SoftDeletes;
@@ -54,7 +43,7 @@ class Order extends Model
 	];
 
 	protected $appends = ['customer_full_name'];
-	
+
 	public const CREATED = 'created';
 	public const CONFIRMED = 'confirmed';
 	public const DELIVERED = 'delivered';
@@ -123,19 +112,19 @@ class Order extends Model
 	 */
 	public static function generateCode()
 	{
-		$dateCode = self::ORDERCODE . '/' . date('Ymd') . '/' .\General::integerToRoman(date('m')). '/' .\General::integerToRoman(date('d')). '/';
+		$dateCode = self::ORDERCODE . '/' . date('Ymd') . '/' . \General::integerToRoman(date('m')) . '/' . \General::integerToRoman(date('d')) . '/';
 
 		$lastOrder = self::select([\DB::raw('MAX(orders.code) AS last_code')])
 			->where('code', 'like', $dateCode . '%')
 			->first();
 
 		$lastOrderCode = !empty($lastOrder) ? $lastOrder['last_code'] : null;
-		
+
 		$orderCode = $dateCode . '00001';
 		if ($lastOrderCode) {
 			$lastOrderNumber = str_replace($dateCode, '', $lastOrderCode);
 			$nextOrderNumber = sprintf('%05d', (int)$lastOrderNumber + 1);
-			
+
 			$orderCode = $dateCode . $nextOrderNumber;
 		}
 

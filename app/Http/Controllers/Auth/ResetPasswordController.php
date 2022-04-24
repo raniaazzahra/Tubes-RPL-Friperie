@@ -6,17 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 
-/**
- * ResetPasswordController
- *
- * PHP version 7
- *
- * @category ResetPasswordController
- * @package  ResetPasswordController
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
+
 class ResetPasswordController extends Controller
 {
 	/*
@@ -56,7 +46,7 @@ class ResetPasswordController extends Controller
 
 		$this->data['email'] = $request->input('email');
 		$this->data['token'] = $token;
-		
+
 		return $this->loadTheme('auth.password.reset', $this->data);
 	}
 }

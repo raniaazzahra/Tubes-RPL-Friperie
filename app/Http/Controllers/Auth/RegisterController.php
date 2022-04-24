@@ -8,17 +8,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-/**
- * RegisterController
- *
- * PHP version 7
- *
- * @category RegisterController
- * @package  RegisterController
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
+
 class RegisterController extends Controller
 {
 	/*

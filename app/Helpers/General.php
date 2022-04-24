@@ -2,17 +2,6 @@
 
 namespace App\Helpers;
 
-/**
- * General
- *
- * PHP version 7
- *
- * @category General
- * @package  General
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class General
 {
 	/**
@@ -44,13 +33,13 @@ class General
 			];
 			$array[] = $placeholder;
 		}
-		
+
 		$multiple = '';
 		if (isset($options['multiple'])) {
 			$multiple = 'multiple';
 		}
 
-		$select = '<select class="'.$class_form.'" name="'.$name.'" '.$multiple.'>';
+		$select = '<select class="' . $class_form . '" name="' . $name . '" ' . $multiple . '>';
 		$select .= General::getMultiLevelOptions($array, 0, [], $selected);
 		$select .= '</select>';
 
@@ -81,15 +70,15 @@ class General
 		$menu_html = '';
 		foreach ($array as $element) {
 			$selected_item = '';
-			if ($element['parent_id']==$parent_id) {
+			if ($element['parent_id'] == $parent_id) {
 				if (in_array($element['id'], $selected)) {
 					$selected_item = 'selected';
 				}
-				$menu_html .= '<option value="'.$element['id'].'" '.$selected_item.'>';
-				for ($j=0; $j<$i; $j++) {
+				$menu_html .= '<option value="' . $element['id'] . '" ' . $selected_item . '>';
+				for ($j = 0; $j < $i; $j++) {
 					$menu_html .= '&mdash; ';
 				}
-				$menu_html .= $element['name'].'</option>';
+				$menu_html .= $element['name'] . '</option>';
 				if (in_array($element['id'], $parents)) {
 					$i++;
 					$menu_html .= General::getMultilevelOptions($array, $element['id'], $parents, $selected);
@@ -112,12 +101,12 @@ class General
 	{
 		$integer = intval($integer);
 		$result = '';
-		
+
 		// Create a lookup array that contains all of the Roman numerals.
 		$lookup = ['M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1];
- 
+
 		foreach ($lookup as $roman => $value) {
-			$matches = intval($integer/$value);
+			$matches = intval($integer / $value);
 			$result .= str_repeat($roman, $matches);
 			$integer = $integer % $value;
 		}
@@ -135,7 +124,7 @@ class General
 	 */
 	public static function priceFormat($number, $currency = '')
 	{
-		$currency = !empty($currency) ? $currency.' ' : '';
+		$currency = !empty($currency) ? $currency . ' ' : '';
 		return $currency . number_format($number, 0, ",", ".");
 	}
 
@@ -155,7 +144,7 @@ class General
 			return '';
 		}
 	}
-	
+
 	/**
 	 * Show attributes json as ul tag
 	 *
@@ -170,7 +159,7 @@ class General
 		if ($attributes) {
 			$showAttributes .= '<ul class="item-attributes">';
 			foreach ($attributes as $key => $attribute) {
-				$showAttributes .= '<li>'. ucwords($key) . ': <span>' . $attribute . '</span><li>';
+				$showAttributes .= '<li>' . ucwords($key) . ': <span>' . $attribute . '</span><li>';
 			}
 			$showAttributes .= '</ul>';
 		}

@@ -4,17 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * ProductInventory
- *
- * PHP version 7
- *
- * @category ProductInventory
- * @package  ProductInventory
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class ProductInventory extends Model
 {
 	protected $fillable = [
@@ -46,7 +35,7 @@ class ProductInventory extends Model
 
 		if ($inventory->qty < $qty) {
 			$product = Product::findOrFail($productId);
-			throw new \App\Exceptions\OutOfStockException('The product '. $product->sku .' is out of stock');
+			throw new \App\Exceptions\OutOfStockException('The product ' . $product->sku . ' is out of stock');
 		}
 
 		$inventory->qty = $inventory->qty - $qty;

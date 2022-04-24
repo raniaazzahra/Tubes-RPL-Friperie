@@ -11,17 +11,6 @@ use App\Models\Category;
 
 use Str;
 
-/**
- * ProductController
- *
- * PHP version 7
- *
- * @category ProductController
- * @package  ProductController
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class ProductController extends Controller
 {
 	/**
@@ -38,18 +27,18 @@ class ProductController extends Controller
 		$this->data['categories'] = Category::parentCategories()
 			->orderBy('name', 'asc')
 			->get();
-		
+
 		$this->data['minPrice'] = Product::min('price');
 		$this->data['maxPrice'] = Product::max('price');
 
 		$this->data['colors'] = AttributeOption::whereHas(
 			'attribute',
 			function ($query) {
-					$query->where('code', 'color')
-						->where('is_filterable', 1);
+				$query->where('code', 'color')
+					->where('is_filterable', 1);
 			}
 		)
-		->orderBy('name', 'asc')->get();
+			->orderBy('name', 'asc')->get();
 
 		$this->data['sizes'] = AttributeOption::whereHas(
 			'attribute',
@@ -58,7 +47,7 @@ class ProductController extends Controller
 					->where('is_filterable', 1);
 			}
 		)->orderBy('name', 'asc')->get();
-								
+
 		$this->data['sorts'] = [
 			url('products') => 'Default',
 			url('products?sort=price-asc') => 'Price - Low to High',
@@ -102,7 +91,7 @@ class ProductController extends Controller
 	{
 		if ($q = $request->query('q')) {
 			$q = str_replace('-', ' ', Str::slug($q));
-			
+
 			$products = $products->whereRaw('MATCH(name, slug, short_description, description) AGAINST (? IN NATURAL LANGUAGE MODE)', [$q]);
 
 			$this->data['q'] = $q;
@@ -210,9 +199,9 @@ class ProductController extends Controller
 				$products = $products->orderBy($sortBy, $orderBy);
 			}
 
-			$this->data['selectedSort'] = url('products?sort='. $sort);
+			$this->data['selectedSort'] = url('products?sort=' . $sort);
 		}
-		
+
 		return $products;
 	}
 
@@ -257,7 +246,7 @@ class ProductController extends Controller
 		}
 
 		$this->data['product'] = $product;
-		
+
 		return $this->loadTheme('products.quick_view', $this->data);
 	}
 }

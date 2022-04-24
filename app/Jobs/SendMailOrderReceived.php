@@ -8,17 +8,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-/**
- * SendMailOrderReceived
- *
- * PHP version 7
- *
- * @category SendMailOrderReceived
- * @package  SendMailOrderReceived
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 
 class SendMailOrderReceived implements ShouldQueue
 {
@@ -49,7 +38,7 @@ class SendMailOrderReceived implements ShouldQueue
 	public function handle()
 	{
 		$orderReceivedEmail = new \App\Mail\OrderReceived($this->order);
-		
+
 		\Mail::to($this->user->email)->send($orderReceivedEmail);
 	}
 }

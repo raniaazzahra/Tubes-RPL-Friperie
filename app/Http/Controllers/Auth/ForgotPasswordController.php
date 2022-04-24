@@ -5,17 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
-/**
- * ForgotPasswordController
- *
- * PHP version 7
- *
- * @category ForgotPasswordController
- * @package  ForgotPasswordController
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
+
 class ForgotPasswordController extends Controller
 {
 	/*

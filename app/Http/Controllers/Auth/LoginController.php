@@ -5,17 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-/**
- * LoginController
- *
- * PHP version 7
- *
- * @category LoginController
- * @package  LoginController
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class LoginController extends Controller
 {
 	/*

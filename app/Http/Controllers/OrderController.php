@@ -9,17 +9,6 @@ use App\Models\OrderItem;
 use App\Models\Shipment;
 use App\Models\ProductInventory;
 
-/**
- * OrderController
- *
- * PHP version 7
- *
- * @category OrderController
- * @package  OrderController
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class OrderController extends Controller
 {
 	/**
@@ -115,7 +104,7 @@ class OrderController extends Controller
 	public function shippingCost(Request $request)
 	{
 		$destination = $request->input('city_id');
-		
+
 		return $this->_getShippingCost($destination, $this->_getTotalWeight());
 	}
 
@@ -213,7 +202,7 @@ class OrderController extends Controller
 				'name' => $serviceName,
 				'type' => 'shipping',
 				'target' => 'total',
-				'value' => '+'. $cost,
+				'value' => '+' . $cost,
 			]
 		);
 
@@ -239,14 +228,14 @@ class OrderController extends Controller
 		$results = [];
 		foreach ($this->couriers as $code => $courier) {
 			$params['courier'] = $code;
-			
+
 			$response = $this->rajaOngkirRequest('cost', $params, 'POST');
-			
+
 			if (!empty($response['rajaongkir']['results'])) {
 				foreach ($response['rajaongkir']['results'] as $cost) {
 					if (!empty($cost['costs'])) {
 						foreach ($cost['costs'] as $costDetail) {
-							$serviceName = strtoupper($cost['code']) .' - '. $costDetail['service'];
+							$serviceName = strtoupper($cost['code']) . ' - ' . $costDetail['service'];
 							$costAmount = $costDetail['cost'][0]['value'];
 							$etd = $costDetail['cost'][0]['etd'];
 
@@ -270,7 +259,7 @@ class OrderController extends Controller
 			'weight' => $weight,
 			'results' => $results,
 		];
-		
+
 		return $response;
 	}
 
@@ -333,7 +322,7 @@ class OrderController extends Controller
 				$this->_saveOrderItems($order);
 				$this->_generatePaymentToken($order);
 				$this->_saveShipment($order, $params);
-	
+
 				return $order;
 			}
 		);
@@ -343,7 +332,7 @@ class OrderController extends Controller
 			$this->_sendEmailOrderReceived($order);
 
 			\Session::flash('success', 'Thank you. Your order has been received!');
-			return redirect('orders/received/'. $order->id);
+			return redirect('orders/received/' . $order->id);
 		}
 
 		return redirect('orders/checkout');
@@ -382,7 +371,7 @@ class OrderController extends Controller
 		];
 
 		$snap = \Midtrans\Snap::createTransaction($params);
-		
+
 		if ($snap->token) {
 			$order->payment_token = $snap->token;
 			$order->payment_url = $snap->redirect_url;
@@ -401,7 +390,7 @@ class OrderController extends Controller
 	{
 		$destination = isset($params['ship_to']) ? $params['shipping_city_id'] : $params['city_id'];
 		$selectedShipping = $this->_getSelectedShipping($destination, $this->_getTotalWeight(), $params['shipping_service']);
-		
+
 
 		$baseTotalPrice = \Cart::getSubTotal();
 		$taxAmount = \Cart::getCondition('TAX 10%')->getCalculatedValue(\Cart::getSubTotal());
@@ -487,7 +476,7 @@ class OrderController extends Controller
 				];
 
 				$orderItem = OrderItem::create($orderItemParams);
-				
+
 				if ($orderItem) {
 					ProductInventory::reduceStock($orderItem->product_id, $orderItem->qty);
 				}
@@ -507,7 +496,7 @@ class OrderController extends Controller
 	{
 		$shippingFirstName = isset($params['ship_to']) ? $params['shipping_first_name'] : $params['first_name'];
 		$shippingLastName = isset($params['ship_to']) ? $params['shipping_last_name'] : $params['last_name'];
-		$shippingCompany = isset($params['ship_to']) ? $params['shipping_company'] :$params['company'];
+		$shippingCompany = isset($params['ship_to']) ? $params['shipping_company'] : $params['company'];
 		$shippingAddress1 = isset($params['ship_to']) ? $params['shipping_address1'] : $params['address1'];
 		$shippingAddress2 = isset($params['ship_to']) ? $params['shipping_address2'] : $params['address2'];
 		$shippingPhone = isset($params['ship_to']) ? $params['shipping_phone'] : $params['phone'];

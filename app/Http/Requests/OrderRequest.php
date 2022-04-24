@@ -4,17 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-/**
- * OrderRequest
- *
- * PHP version 7
- *
- * @category OrderRequest
- * @package  OrderRequest
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class OrderRequest extends FormRequest
 {
 	/**

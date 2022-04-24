@@ -8,17 +8,6 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\Slide;
 
-/**
- * HomeController
- *
- * PHP version 7
- *
- * @category HomeController
- * @package  HomeController
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class HomeController extends Controller
 {
 	/**

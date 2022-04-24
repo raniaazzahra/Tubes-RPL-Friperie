@@ -7,17 +7,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-/**
- * OrderShipped
- *
- * PHP version 7
- *
- * @category OrderShipped
- * @package  OrderShipped
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class OrderShipped extends Mailable
 {
 	use Queueable, SerializesModels;

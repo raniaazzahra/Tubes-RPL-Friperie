@@ -7,17 +7,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
-/**
- * Controller
- *
- * PHP version 7
- *
- * @category Controller
- * @package  Controller
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class Controller extends BaseController
 {
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -71,7 +60,7 @@ class Controller extends BaseController
 	 */
 	protected function loadTheme($view, $data = [])
 	{
-		return view('themes/'. env('APP_THEME') .'/'. $view, $data);
+		return view('themes/' . env('APP_THEME') . '/' . $view, $data);
 	}
 
 	/**
@@ -96,10 +85,10 @@ class Controller extends BaseController
 		if ($params && $method == 'POST') {
 			$requestParams['form_params'] = $params;
 		} else if ($params && $method == 'GET') {
-			$query = is_array($params) ? '?'.http_build_query($params) : '';
+			$query = is_array($params) ? '?' . http_build_query($params) : '';
 			$url = $this->rajaOngkirBaseUrl . $resource . $query;
 		}
-		
+
 		$response = $client->request($method, $url, $requestParams);
 
 		return json_decode($response->getBody(), true);
@@ -113,7 +102,7 @@ class Controller extends BaseController
 	protected function getProvinces()
 	{
 		$provinceFile = 'provinces.txt';
-		$provinceFilePath = $this->uploadsFolder. 'files/' . $provinceFile;
+		$provinceFilePath = $this->uploadsFolder . 'files/' . $provinceFile;
 
 		$isExistProvinceJson = \Storage::disk('local')->exists($provinceFilePath);
 
@@ -143,8 +132,8 @@ class Controller extends BaseController
 	 */
 	protected function getCities($provinceId)
 	{
-		$cityFile = 'cities_at_'. $provinceId .'.txt';
-		$cityFilePath = $this->uploadsFolder. 'files/' .$cityFile;
+		$cityFile = 'cities_at_' . $provinceId . '.txt';
+		$cityFilePath = $this->uploadsFolder . 'files/' . $cityFile;
 
 		$isExistCitiesJson = \Storage::disk('local')->exists($cityFilePath);
 
@@ -154,11 +143,11 @@ class Controller extends BaseController
 		}
 
 		$cityList = unserialize(\Storage::get($cityFilePath));
-		
+
 		$cities = [];
 		if (!empty($cityList)) {
 			foreach ($cityList as $city) {
-				$cities[$city['city_id']] = strtoupper($city['type'].' '.$city['city_name']);
+				$cities[$city['city_id']] = strtoupper($city['type'] . ' ' . $city['city_name']);
 			}
 		}
 

@@ -4,17 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * OrderItem
- *
- * PHP version 7
- *
- * @category OrderItem
- * @package  OrderItem
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class OrderItem extends Model
 {
 	protected $fillable = [

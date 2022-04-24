@@ -4,17 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Permission
- *
- * PHP version 7
- *
- * @category Permission
- * @package  Permission
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class Permission extends \Spatie\Permission\Models\Permission
 {
 	/**

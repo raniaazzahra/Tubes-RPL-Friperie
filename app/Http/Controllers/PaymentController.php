@@ -7,17 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Payment;
 
-/**
- * PaymentController
- *
- * PHP version 7
- *
- * @category PaymentController
- * @package  PaymentController
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class PaymentController extends Controller
 {
 	/**
@@ -119,7 +108,7 @@ class PaymentController extends Controller
 			);
 		}
 
-		$message = 'Payment status is : '. $paymentStatus;
+		$message = 'Payment status is : ' . $paymentStatus;
 
 		$response = [
 			'code' => 200,
@@ -140,14 +129,14 @@ class PaymentController extends Controller
 	{
 		$code = $request->query('order_id');
 		$order = Order::where('code', $code)->firstOrFail();
-		
+
 		if ($order->payment_status == Order::UNPAID) {
-			return redirect('payments/failed?order_id='. $code);
+			return redirect('payments/failed?order_id=' . $code);
 		}
 
 		\Session::flash('success', "Thank you for completing the payment process!");
 
-		return redirect('orders/received/'. $order->id);
+		return redirect('orders/received/' . $order->id);
 	}
 
 	/**
@@ -164,7 +153,7 @@ class PaymentController extends Controller
 
 		\Session::flash('error', "Sorry, we couldn't process your payment.");
 
-		return redirect('orders/received/'. $order->id);
+		return redirect('orders/received/' . $order->id);
 	}
 
 	/**
@@ -181,6 +170,6 @@ class PaymentController extends Controller
 
 		\Session::flash('error', "Sorry, we couldn't process your payment.");
 
-		return redirect('orders/received/'. $order->id);
+		return redirect('orders/received/' . $order->id);
 	}
 }

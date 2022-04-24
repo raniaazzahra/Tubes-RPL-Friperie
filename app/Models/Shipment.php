@@ -4,17 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Shipment
- *
- * PHP version 7
- *
- * @category Shipment
- * @package  Shipment
- * @author   Sugiarto <sugiarto.dlingo@gmail.com>
- * @license  https://opensource.org/licenses/MIT MIT License
- * @link     http://localhost/
- */
 class Shipment extends Model
 {
 	public const PENDING = 'pending';
