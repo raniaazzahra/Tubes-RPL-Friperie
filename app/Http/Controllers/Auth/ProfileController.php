@@ -12,6 +12,8 @@ class ProfileController extends Controller
 	 *
 	 * @return void
 	 */
+    
+    //define a constructors
 	public function __construct()
 	{
 		parent::__construct();
@@ -24,6 +26,7 @@ class ProfileController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
+    //call the class without mentioning the function.
 	public function index()
 	{
 		$user = \Auth::user();
@@ -42,6 +45,7 @@ class ProfileController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
+    //Update the specified resource in storage.
 	public function update(Request $request)
 	{
 		$params = $request->except('_token');
